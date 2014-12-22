@@ -10,7 +10,6 @@ public class Block {
     String name;
     int velocity_x;
     int velocity_y;
-    int step;
 
     Block(int x,int y,int width, int height, Color color,String name) {
     	this.width = width;
@@ -25,17 +24,21 @@ public class Block {
     	velocity_y = -1;
 
     }
-
-    void update() {
-    	step++;
-    	
-    	if(step<200) {
-    		position_y --;
-    	} else if(step<300) {
-    		position_x ++;
-    	} else if(step<500) {
-    		position_y ++;
-    	}
+    
+    void move_right() {
+    	position_x ++;
+    }
+    
+    void move_left() {
+    	position_x --;
+    }
+    
+    void move_top() {
+    	position_y --;
+    }
+    
+    void move_bottom() {
+    	position_y ++;
     }
 
     void draw(Graphics block) {

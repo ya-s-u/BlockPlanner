@@ -15,6 +15,8 @@ public class DrawPanel extends JPanel implements ActionListener {
     static final int block_width = 150;
     static final int block_height = 120;
     static final int blick_margin = 100;
+    
+    int step;
 
     Block block1 = new Block(100, window_height-block_height, block_width, block_height, Color.orange, "A");
     Block block2 = new Block(350, window_height-block_height, block_width, block_height, Color.red, "B");
@@ -25,8 +27,14 @@ public class DrawPanel extends JPanel implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent window_width) {
-    	block1.update();
-    	block2.update();
+    	step++;
+    	
+    	if(step<200) {
+    		block1.move_top();
+    	} else if(step<400) {
+    		block2.move_right();
+    	}
+    	
        repaint();
     }
     
