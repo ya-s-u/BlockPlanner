@@ -11,7 +11,7 @@ public class Block {
     int velocity_x;
     int velocity_y;
 
-    Block(int width, int height, String color,String name) {
+    Block(int x,int y,int width, int height, String color,String name) {
     	this.width = width;
     	this.height = height;
     	this.color = color;
@@ -19,8 +19,8 @@ public class Block {
 
 //       position_x = (int)(Math.random() * (DrawPanel.window_width - width));
 //       position_y = (int)(Math.random() * (DrawPanel.window_height - width));
-    	position_x = 100;
-    	position_y = 300;
+    	position_x = x;
+    	position_y = y;
     	
     	velocity_x = 0;
     	velocity_y = -1;

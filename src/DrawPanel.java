@@ -12,8 +12,8 @@ public class DrawPanel extends JPanel implements ActionListener {
     static final int window_width = 1400;
     static final int window_height = 900;
 
-    Block block1 = new Block(100, 50, "orange","A");
-    Block block2 = new Block(200, 50, "orange","B");
+    Block block1 = new Block(100, 300, 100, 50, "orange","A");
+    Block block2 = new Block(300, 300, 100, 50, "orange","B");
     
     public DrawPanel() {
         setBackground(Color.white);
