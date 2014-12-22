@@ -1,13 +1,13 @@
+import static java.awt.RenderingHints.*;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JPanel;
-import java.util.Arrays;
-import static java.awt.RenderingHints.KEY_ANTIALIASING;
-import static java.awt.RenderingHints.VALUE_ANTIALIAS_ON;
 
 public class DrawPanel extends JPanel implements ActionListener {
 	static final int window_width = 1600;
@@ -18,6 +18,7 @@ public class DrawPanel extends JPanel implements ActionListener {
 	static final int block_height = 120;
 	static final int block_margin = 100;
 
+	int motion_num=0;
 	int step;
 	
 	int[] column = new int[]{
@@ -44,8 +45,12 @@ public class DrawPanel extends JPanel implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent window_width) {
-		move_block(0, 1);
-		
+		switch(motion_num){
+		case 0: move_block(0, 1);
+				break;
+		case 1: move_block(2, 3);
+				break;
+		}
 		repaint();
 	}
 
@@ -58,6 +63,9 @@ public class DrawPanel extends JPanel implements ActionListener {
 			block[block_num].move_right();
 		} else if(step < (block_height*2 + block_width+block_margin + block_height)/3) {
 			block[block_num].move_bottom();
+		} else{
+			motion_num++;
+			step = 0;
 		}
 	}
 
