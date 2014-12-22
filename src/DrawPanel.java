@@ -9,11 +9,15 @@ import static java.awt.RenderingHints.KEY_ANTIALIASING;
 import static java.awt.RenderingHints.VALUE_ANTIALIAS_ON;
 
 public class DrawPanel extends JPanel implements ActionListener {
-    static final int window_width = 1400;
+    static final int window_width = 1600;
     static final int window_height = 900;
+    
+    static final int block_width = 150;
+    static final int block_height = 120;
+    static final int blick_margin = 100;
 
-    Block block1 = new Block(100, 300, 100, 50, "orange","A");
-    Block block2 = new Block(300, 300, 100, 50, "orange","B");
+    Block block1 = new Block(100, window_height-block_height, block_width, block_height, Color.orange, "A");
+    Block block2 = new Block(350, window_height-block_height, block_width, block_height, Color.red, "B");
     
     public DrawPanel() {
         setBackground(Color.white);
@@ -24,6 +28,10 @@ public class DrawPanel extends JPanel implements ActionListener {
     	block1.update();
     	block2.update();
        repaint();
+    }
+    
+    public void move_block() {
+    	
     }
 
     public void paintComponent(Graphics window_width) {

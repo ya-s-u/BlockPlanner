@@ -6,36 +6,23 @@ public class Block {
     int position_y;
     int width;
     int height;
-    String color;
+    Color color;
     String name;
     int velocity_x;
     int velocity_y;
 
-    Block(int x,int y,int width, int height, String color,String name) {
+    Block(int x,int y,int width, int height, Color color,String name) {
     	this.width = width;
     	this.height = height;
     	this.color = color;
     	this.name = name;
 
-//       position_x = (int)(Math.random() * (DrawPanel.window_width - width));
-//       position_y = (int)(Math.random() * (DrawPanel.window_height - width));
     	position_x = x;
     	position_y = y;
     	
     	velocity_x = 0;
     	velocity_y = -1;
 
-        // 進行方向はランダム
-//        if (Math.random() > 0.5) {
-//        	velocity_x = 1;
-//        } else {
-//        	velocity_x = -1;
-//        }
-//        if (Math.random() > 0.5) {
-//        	velocity_y = 1;
-//        } else {
-//        	velocity_y = -1;
-//        }
     }
 
     void update() {
@@ -53,7 +40,7 @@ public class Block {
 
     void draw(Graphics block) {
     	int size = 20;
-    	block.setColor(Color.orange);
+    	block.setColor(color);
     	block.fillRect(position_x, position_y, width, height);
     	block.setColor(Color.black);
     	block.setFont(new Font(null,Font.PLAIN,size));
