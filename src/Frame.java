@@ -7,7 +7,10 @@ import javax.swing.Timer;
 
 public class Frame extends JFrame {
     final static int fps = 30;
-    String[][] m_list = new String[20][2];
+    String[][] place_list = new String[20][2];
+    int[] from = new int[20];
+    int[] to = new int[20];
+    int[] height = new int[20];
     String[] answer = {
     		"pick up from the table",
     		"Place blue rectangle on C",
@@ -15,14 +18,15 @@ public class Frame extends JFrame {
     		"Place A on B"
     };
     public Frame() {
-    	m_list = make_motion_list(answer);
-        DrawPanel panel = new DrawPanel();
+    	place_list = make_place_list(answer);
+    	convert_to_motion_list(place_list);
+        DrawPanel panel = new DrawPanel(from,to,height);
         add(panel);
 
         new Timer(fps, panel).start();
     }
 
-    public static void main(String[] ball) {
+	public static void main(String[] ball) {
         JFrame frame = new Frame();
         frame.setTitle("ブロックプランナー");
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -32,7 +36,7 @@ public class Frame extends JFrame {
         frame.setVisible(true);
     }
     
-    public static String[][] make_motion_list(String[] answer){
+    public static String[][] make_place_list(String[] answer){
     	String[][] m_list = new String[6][2];
     	int m_num = 0;
     	int step = 0;
@@ -53,4 +57,14 @@ public class Frame extends JFrame {
     	}
     	return m_list;
     }
+    
+    private void convert_to_motion_list(String[][] place_list) {
+    	// 何かしらの処理によってfrom,to,height(ブロックいくつ分高さが違うか)を作る
+    	from[0] = 0;
+    	to[0] = 1;
+    	height[0] = 0;
+    	from[1] = 2;
+    	to[1] = 3;
+    	height[1] = 1;
+	}
 }
