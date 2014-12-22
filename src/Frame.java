@@ -3,10 +3,10 @@ import java.lang.String;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 
-public class BlockFrame extends JFrame {
+public class Frame extends JFrame {
     final static int fps = 30;
 
-    public BlockFrame() {
+    public Frame() {
         DrawPanel panel = new DrawPanel();
         add(panel);
 
@@ -14,8 +14,8 @@ public class BlockFrame extends JFrame {
     }
 
     public static void main(String[] ball) {
-        JFrame frame = new BlockFrame();
-        frame.setTitle("反射するボール");
+        JFrame frame = new Frame();
+        frame.setTitle("ブロックプランナー");
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setBackground(Color.white);
         frame.setResizable(false);
