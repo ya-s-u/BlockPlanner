@@ -1,5 +1,6 @@
-import java.awt.*;
-import java.lang.Math;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
 
 public class Block {
     int width;
@@ -35,6 +36,17 @@ public class Block {
     
     void move_bottom() {
     	position_y += speed;
+    }
+    
+    int fall_down(int moved,int step,int remit){
+    	moved += step/2;
+    	if(moved > remit){
+        	position_y += (step/2-moved+remit);
+    		moved = remit;
+    	}else{
+    		position_y += step/2;
+    	}
+    	return moved;
     }
 
     void draw(Graphics block) {

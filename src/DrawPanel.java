@@ -20,6 +20,7 @@ public class DrawPanel extends JPanel implements ActionListener {
 
 	int motion_num=0;
 	int step;
+	int moved;
 	
 	int[] column = new int[]{
 		block_margin,
@@ -57,14 +58,17 @@ public class DrawPanel extends JPanel implements ActionListener {
 	public void move_block(int from, int to) {
 		step++;
 		int block_num = from;
-		if(step < block_height*2/3) {
+		if(step < block_height*3/3) {
 			block[block_num].move_top();
-		} else if(step < (block_height*2 + block_width+block_margin)/3) {
+		} else if(step < (block_height*3 + block_width+block_margin)/3) {
 			block[block_num].move_right();
-		} else if(step < (block_height*2 + block_width+block_margin + block_height)/3) {
-			block[block_num].move_bottom();
+//		} else if(step < (block_height*3 + block_width+block_margin + block_height*2)/3) {
+//			block[block_num].move_bottom();
+		} else if(moved < block_height*2){
+			moved = block[block_num].fall_down(moved,step-(block_height*3 + block_width+block_margin)/3,block_height*2);
 		} else{
 			motion_num++;
+			moved = 0;
 			step = 0;
 		}
 	}
