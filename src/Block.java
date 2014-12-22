@@ -10,6 +10,7 @@ public class Block {
     String name;
     int velocity_x;
     int velocity_y;
+    int step;
 
     Block(int x,int y,int width, int height, Color color,String name) {
     	this.width = width;
@@ -26,16 +27,15 @@ public class Block {
     }
 
     void update() {
-    	position_x += velocity_x;
-    	position_y += velocity_y;
-
-        // 壁に衝突すれば反射
-        if (position_x >= (DrawPanel.window_width - width) || position_x <= 0) {
-        	velocity_x = -velocity_x;
-        }
-        if (position_y >= (DrawPanel.window_height - height) || position_y <= 0) {
-        	velocity_y = -velocity_y;
-        }
+    	step++;
+    	
+    	if(step<200) {
+    		position_y --;
+    	} else if(step<300) {
+    		position_x ++;
+    	} else if(step<500) {
+    		position_y ++;
+    	}
     }
 
     void draw(Graphics block) {

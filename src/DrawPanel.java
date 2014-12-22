@@ -30,7 +30,7 @@ public class DrawPanel extends JPanel implements ActionListener {
        repaint();
     }
     
-    public void move_block() {
+    public void move_block(int from, int to) {
     	
     }
 
