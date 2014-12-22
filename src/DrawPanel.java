@@ -44,10 +44,14 @@ public class DrawPanel extends JPanel implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent window_width) {
-		//move_block(0, 1);
-		step++;
+		move_block(0, 1);
+		
+		repaint();
+	}
 
-		int block_num = 0;
+	public void move_block(int from, int to) {
+		step++;
+		int block_num = from;
 		if(step < block_height*2/3) {
 			block[block_num].move_top();
 		} else if(step < (block_height*2 + block_width+block_margin)/3) {
@@ -55,11 +59,6 @@ public class DrawPanel extends JPanel implements ActionListener {
 		} else if(step < (block_height*2 + block_width+block_margin + block_height)/3) {
 			block[block_num].move_bottom();
 		}
-		
-		repaint();
-	}
-
-	public void move_block(int from, int to) {
 	}
 
 	public void paintComponent(Graphics window_width) {
