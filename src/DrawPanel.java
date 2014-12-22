@@ -9,10 +9,11 @@ import static java.awt.RenderingHints.KEY_ANTIALIASING;
 import static java.awt.RenderingHints.VALUE_ANTIALIAS_ON;
 
 public class DrawPanel extends JPanel implements ActionListener {
-    static final int window_width = 500;
-    static final int window_height = 400;
+    static final int window_width = 1400;
+    static final int window_height = 900;
 
-    Block block = new Block(100, 50, "orange");
+    Block block1 = new Block(100, 50, "orange","A");
+    Block block2 = new Block(200, 50, "orange","B");
     
     public DrawPanel() {
         setBackground(Color.white);
@@ -20,7 +21,8 @@ public class DrawPanel extends JPanel implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent window_width) {
-    	block.update();
+    	block1.update();
+    	block2.update();
        repaint();
     }
 
@@ -29,6 +31,7 @@ public class DrawPanel extends JPanel implements ActionListener {
 
         Graphics2D panel = (Graphics2D)window_width;
         panel.setRenderingHint(KEY_ANTIALIASING, VALUE_ANTIALIAS_ON);
-        block.draw(panel);
+        block1.draw(panel);
+        block2.draw(panel);
     }
 }
