@@ -8,6 +8,7 @@ public class Block {
     String name;
     int position_x;
     int position_y;
+    int speed = 3;
 //    int velocity_x;
 //    int velocity_y;
 
@@ -21,19 +22,19 @@ public class Block {
     }
     
     void move_right() {
-    	position_x ++;
+    	position_x += speed;
     }
     
     void move_left() {
-    	position_x --;
+    	position_x -= speed;
     }
     
     void move_top() {
-    	position_y --;
+    	position_y -= speed;
     }
     
     void move_bottom() {
-    	position_y ++;
+    	position_y += speed;
     }
 
     void draw(Graphics block) {
