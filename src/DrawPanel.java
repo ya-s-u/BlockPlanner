@@ -20,7 +20,6 @@ public class DrawPanel extends JPanel implements ActionListener {
 	
 	int [] from;
 	int [] to;
-	int [] height;
 
 	int motion_num=0;
 	int step;
@@ -44,40 +43,67 @@ public class DrawPanel extends JPanel implements ActionListener {
 		new Block(column[5], window_height-block_height-ground_height, block_width, block_height, Color.magenta, "F"),
 	};
 
-	public DrawPanel(int[] from,int[] to,int[] height) {
+	public DrawPanel(int[] from,int[] to,int[][] block_position) {
 		setBackground(Color.white);
 		setPreferredSize(new Dimension(window_width, window_height));
 		this.from = from;
 		this.to = to;
-		this.height = height;
+		for(int i=0;i<6;i++){
+			block[i].push_position(block_position[i][0],block_position[i][1]);
+		}
 	}
 
 	public void actionPerformed(ActionEvent window_width) {
-		move_block(from[motion_num],to[motion_num],height[motion_num]);
+		move_block(from[motion_num],to[motion_num]);
 		repaint();
 	}
 
-	public void move_block(int from, int to,int height) {
+	public void move_block(int from, int to) {
+		int width = block[to].get_column()-block[from].get_column();
+		int height = block[to].get_row()-block[from].get_row();
 		if(motion_num > 1)
 			return;
-		int total_height =block_height*(height+2);
-		if(height<0)
-			total_height = block_height;
-			
 		step++;
 		int block_num = from;
-		if(step < total_height/3) {
-			block[block_num].move_top();
-		} else if(step < (total_height + block_width+block_margin)/3) {
-			block[block_num].move_right();
-//		} else if(step < (total_height + block_width+block_margin + total_height - block_height)/3) {
-//			block[block_num].move_bottom();
-		} else if(moved < block_height){
-			moved = block[block_num].fall_down(moved,step-(total_height + block_width+block_margin)/3,block_height);
-		} else{
-			motion_num++;
-			moved = 0;
-			step = 0;
+		int total_height =block_height*(height+2);
+		if(height<0){
+			if(step < block_height/3) {
+				block[block_num].move_top();
+			} else if(step < (total_height + block_width*Math.abs(width)+block_margin)/3) {
+				if(width>0){
+					block[block_num].move_right();
+				} else{
+					block[block_num].move_left();
+				}
+//			} else if(step < (total_height + block_width+block_margin + total_height - block_height)/3) {
+//				block[block_num].move_bottom();
+			} else if(moved < block_height*(-height+1)){
+				moved = block[block_num].fall_down(moved,step-(block_height + block_width+block_margin)/3,block_height*(-height+1));
+			} else{
+				motion_num++;
+				moved = 0;
+				step = 0;
+				block[block_num].push_position(to, block[to].get_row()+1);
+			}
+		}else{
+			if(step < (block_height*(height+2))/3) {
+				block[block_num].move_top();
+			} else if(step < (block_height*(height+2) + block_width*Math.abs(width)+block_margin)/3) {
+				if(width>0){
+					block[block_num].move_right();
+				} else{
+					block[block_num].move_left();
+				}
+//			} else if(step < (block_height*(height+2) + block_width+block_margin + block_height*(height+2) - block_height)/3) {
+//				block[block_num].move_bottom();
+			} else if(moved < block_height){
+				moved = block[block_num].fall_down(moved,step-(block_height*(height+2) + block_width+block_margin)/3,block_height);
+			} else{
+				motion_num++;
+				moved = 0;
+				step = 0;
+				block[block_num].push_position(to, block[to].get_row()+1);
+			}
 		}
 	}
 

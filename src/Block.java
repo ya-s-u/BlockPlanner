@@ -10,8 +10,8 @@ public class Block {
     int position_x;
     int position_y;
     int speed = 3;
-//    int velocity_x;
-//    int velocity_y;
+    int column;
+    int row;
 
     Block(int x,int y,int width, int height, Color color,String name) {
     	this.width = width;
@@ -47,6 +47,19 @@ public class Block {
     		position_y += step/2;
     	}
     	return moved;
+    }
+    
+    void push_position(int column,int row){
+    	this.column = column;
+    	this.row = row;
+    }
+    
+    int get_column(){
+    	return column;
+    }
+    
+    int get_row(){
+    	return row;
     }
 
     void draw(Graphics block) {

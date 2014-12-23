@@ -12,15 +12,23 @@ public class Frame extends JFrame {
     int[] to = new int[20];
     int[] height = new int[20];
     String[] answer = {
-    		"pick up from the table",
-    		"Place blue rectangle on C",
+    		"pick up B from the table",
+    		"Place B on C",
     		"pick up A from the table",
     		"Place A on B"
+    };
+    int[][] block_position = {
+    		{0,0},
+    		{1,0},
+    		{2,0},
+    		{3,0},
+    		{3,1},
+    		{3,2}
     };
     public Frame() {
     	place_list = make_place_list(answer);
     	convert_to_motion_list(place_list);
-        DrawPanel panel = new DrawPanel(from,to,height);
+        DrawPanel panel = new DrawPanel(from,to,block_position);
         add(panel);
 
         new Timer(fps, panel).start();
@@ -59,12 +67,10 @@ public class Frame extends JFrame {
     }
     
     private void convert_to_motion_list(String[][] place_list) {
-    	// 何かしらの処理によってfrom,to,height(ブロックいくつ分高さが違うか)を作る
+    	// 何かしらの処理によってfrom,toを作る
     	from[0] = 0;
     	to[0] = 1;
-    	height[0] = 0;
     	from[1] = 2;
-    	to[1] = 3;
-    	height[1] = 1;
+    	to[1] = 0;
 	}
 }
