@@ -45,25 +45,25 @@ public class Frame extends JFrame {
     }
     
     public static String[][] make_place_list(String[] answer){
-    	String[][] m_list = new String[6][2];
-    	int m_num = 0;
+    	String[][] place_list = new String[6][2];
+    	int p_num = 0;
     	int step = 0;
     	while(step < answer.length){
-			Matcher motion = Pattern.compile("(Place .*)(on .*)").matcher(answer[step]);
-			if(motion.find()){
-				String A = motion.group(1);
-				String B = motion.group(2);
+			Matcher place = Pattern.compile("(Place .*)(on .*)").matcher(answer[step]);
+			if(place.find()){
+				String A = place.group(1);
+				String B = place.group(2);
 				Matcher from = Pattern.compile("(Place.)(.*)").matcher(A);
 				Matcher to = Pattern.compile("(on.)(.*)").matcher(B);
 				if(from.find())
-					m_list[m_num][0] = from.group(2);
+					place_list[p_num][0] = from.group(2);
 				if(to.find())
-					m_list[m_num][1] = to.group(2);
-				m_num++;
+					place_list[p_num][1] = to.group(2);
+				p_num++;
 			}
 			step++;
     	}
-    	return m_list;
+    	return place_list;
     }
     
     private void convert_to_motion_list(String[][] place_list) {
