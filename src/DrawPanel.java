@@ -61,7 +61,7 @@ public class DrawPanel extends JPanel implements ActionListener {
 	public void move_block(int from, int to) {
 		int width = block[to].get_column()-block[from].get_column();
 		int height = block[to].get_row()-block[from].get_row();
-		if(motion_num > 1)
+		if(motion_num > 2)
 			return;
 		step++;
 		int block_num = from;
@@ -69,7 +69,7 @@ public class DrawPanel extends JPanel implements ActionListener {
 		if(height<0){
 			if(step < block_height/3) {
 				block[block_num].move_top();
-			} else if(step < (total_height + block_width*Math.abs(width)+block_margin)/3) {
+			} else if(step < (block_height + block_width*Math.abs(width)+block_margin*Math.abs(width))/3) {
 				if(width>0){
 					block[block_num].move_right();
 				} else{
@@ -78,7 +78,7 @@ public class DrawPanel extends JPanel implements ActionListener {
 //			} else if(step < (total_height + block_width+block_margin + total_height - block_height)/3) {
 //				block[block_num].move_bottom();
 			} else if(moved < block_height*(-height+1)){
-				moved = block[block_num].fall_down(moved,step-(block_height + block_width+block_margin)/3,block_height*(-height+1));
+				moved = block[block_num].fall_down(moved,step-(block_height + block_width*Math.abs(width)+block_margin*Math.abs(width))/3,block_height*(-height+1));
 			} else{
 				motion_num++;
 				moved = 0;
@@ -88,7 +88,7 @@ public class DrawPanel extends JPanel implements ActionListener {
 		}else{
 			if(step < (block_height*(height+2))/3) {
 				block[block_num].move_top();
-			} else if(step < (block_height*(height+2) + block_width*Math.abs(width)+block_margin)/3) {
+			} else if(step < (block_height*(height+2) + block_width*Math.abs(width)+block_margin*Math.abs(width))/3) {
 				if(width>0){
 					block[block_num].move_right();
 				} else{
@@ -97,7 +97,7 @@ public class DrawPanel extends JPanel implements ActionListener {
 //			} else if(step < (block_height*(height+2) + block_width+block_margin + block_height*(height+2) - block_height)/3) {
 //				block[block_num].move_bottom();
 			} else if(moved < block_height){
-				moved = block[block_num].fall_down(moved,step-(block_height*(height+2) + block_width+block_margin)/3,block_height);
+				moved = block[block_num].fall_down(moved,step-(block_height*(height+2) + block_width*Math.abs(width)+block_margin*Math.abs(width))/3,block_height);
 			} else{
 				motion_num++;
 				moved = 0;

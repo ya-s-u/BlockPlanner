@@ -23,7 +23,7 @@ public class Frame extends JFrame {
     		{2,0},
     		{3,0},
     		{3,1},
-    		{3,2}
+    		{5,0}
     };
     public Frame() {
     	place_list = make_place_list(answer);
@@ -72,5 +72,7 @@ public class Frame extends JFrame {
     	to[0] = 1;
     	from[1] = 2;
     	to[1] = 0;
+    	from[2] = 5;
+    	to[2] = 4;
 	}
 }
