@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -8,8 +9,8 @@ import javax.swing.Timer;
 public class Frame extends JFrame {
     final static int fps = 30;
     String[][] place_list = new String[20][2];
-    int[] from = new int[20];
-    int[] to = new int[20];
+    ArrayList from = new ArrayList();
+    ArrayList to = new ArrayList();
     int[] height = new int[20];
     String[] answer = {
     		"pick up B from the table",
@@ -23,7 +24,7 @@ public class Frame extends JFrame {
     		{2,0},
     		{3,0},
     		{3,1},
-    		{3,2}
+    		{5,0}
     };
     public Frame() {
     	place_list = make_place_list(answer);
@@ -67,10 +68,9 @@ public class Frame extends JFrame {
     }
     
     private void convert_to_motion_list(String[][] place_list) {
-    	// 何かしらの処理によってfrom,toを作る
-    	from[0] = 0;
-    	to[0] = 1;
-    	from[1] = 2;
-    	to[1] = 0;
+    	// TODO:何かしらの処理によってfrom,toを作る
+    	from.add(0); to.add(1);
+    	from.add(2); to.add(0);
+    	from.add(3); to.add(0);
 	}
 }

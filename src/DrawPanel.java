@@ -1,5 +1,6 @@
 import static java.awt.RenderingHints.*;
 
+import java.util.*;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -17,9 +18,9 @@ public class DrawPanel extends JPanel implements ActionListener {
 	static final int block_width = 150;
 	static final int block_height = 120;
 	static final int block_margin = 100;
-	
-	int [] from;
-	int [] to;
+
+    ArrayList from = new ArrayList();
+    ArrayList to = new ArrayList();
 
 	int motion_num=0;
 	int step;
@@ -43,7 +44,7 @@ public class DrawPanel extends JPanel implements ActionListener {
 		new Block(column[5], window_height-block_height-ground_height, block_width, block_height, Color.magenta, "F"),
 	};
 
-	public DrawPanel(int[] from,int[] to,int[][] block_position) {
+	public DrawPanel(ArrayList from,ArrayList to,int[][] block_position) {
 		setBackground(Color.white);
 		setPreferredSize(new Dimension(window_width, window_height));
 		this.from = from;
@@ -54,14 +55,14 @@ public class DrawPanel extends JPanel implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent window_width) {
-		move_block(from[motion_num],to[motion_num]);
+		move_block((int)from.get(motion_num), (int)to.get(motion_num), from.size());
 		repaint();
 	}
 
-	public void move_block(int from, int to) {
+	public void move_block(int from, int to, int size) {
 		int width = block[to].get_column()-block[from].get_column();
 		int height = block[to].get_row()-block[from].get_row();
-		if(motion_num > 1)
+		if(motion_num > size)
 			return;
 		step++;
 		int block_num = from;
@@ -69,7 +70,7 @@ public class DrawPanel extends JPanel implements ActionListener {
 		if(height<0){
 			if(step < block_height/3) {
 				block[block_num].move_top();
-			} else if(step < (total_height + block_width*Math.abs(width)+block_margin)/3) {
+			} else if(step < (block_height + block_width*Math.abs(width)+block_margin*Math.abs(width))/3) {
 				if(width>0){
 					block[block_num].move_right();
 				} else{
@@ -78,7 +79,7 @@ public class DrawPanel extends JPanel implements ActionListener {
 //			} else if(step < (total_height + block_width+block_margin + total_height - block_height)/3) {
 //				block[block_num].move_bottom();
 			} else if(moved < block_height*(-height+1)){
-				moved = block[block_num].fall_down(moved,step-(block_height + block_width+block_margin)/3,block_height*(-height+1));
+				moved = block[block_num].fall_down(moved,step-(block_height + block_width*Math.abs(width)+block_margin*Math.abs(width))/3,block_height*(-height+1));
 			} else{
 				motion_num++;
 				moved = 0;
@@ -88,7 +89,7 @@ public class DrawPanel extends JPanel implements ActionListener {
 		}else{
 			if(step < (block_height*(height+2))/3) {
 				block[block_num].move_top();
-			} else if(step < (block_height*(height+2) + block_width*Math.abs(width)+block_margin)/3) {
+			} else if(step < (block_height*(height+2) + block_width*Math.abs(width)+block_margin*Math.abs(width))/3) {
 				if(width>0){
 					block[block_num].move_right();
 				} else{
@@ -97,7 +98,7 @@ public class DrawPanel extends JPanel implements ActionListener {
 //			} else if(step < (block_height*(height+2) + block_width+block_margin + block_height*(height+2) - block_height)/3) {
 //				block[block_num].move_bottom();
 			} else if(moved < block_height){
-				moved = block[block_num].fall_down(moved,step-(block_height*(height+2) + block_width+block_margin)/3,block_height);
+				moved = block[block_num].fall_down(moved,step-(block_height*(height+2) + block_width*Math.abs(width)+block_margin*Math.abs(width))/3,block_height);
 			} else{
 				motion_num++;
 				moved = 0;

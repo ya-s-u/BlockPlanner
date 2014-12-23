@@ -1,11 +1,14 @@
 # BlockPlanner
 
+## Required
+JavaSE 1.7
+
 ## Usage
 ```
 > cd BlockPlanner
 > cd src
-> javac BlockFrame.java
-> java BlockFrame
+> javac Frame.java
+> java Frame
 ```
 
 ## Demo
