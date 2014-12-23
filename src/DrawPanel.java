@@ -1,6 +1,8 @@
 import static java.awt.RenderingHints.*;
 
 import java.util.*;
+import java.awt.*;
+import java.awt.event.*;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -11,6 +13,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 
 public class DrawPanel extends JPanel implements ActionListener {
+	Image hand;
+	
 	static final int window_width = 1600;
 	static final int window_height = 900;
 	static final int ground_height = 40;
@@ -79,7 +83,7 @@ public class DrawPanel extends JPanel implements ActionListener {
 //			} else if(step < (total_height + block_width+block_margin + total_height - block_height)/3) {
 //				block[block_num].move_bottom();
 			} else if(moved < block_height*(-height+1)){
-				moved = block[block_num].fall_down(moved,step-(block_height + block_width*Math.abs(width)+block_margin*Math.abs(width))/3,block_height*(-height+1));
+				moved = block[block_num].fall_down(moved, step-(block_height + block_width*Math.abs(width)+block_margin*Math.abs(width))/3, block_height*(-height+1));
 			} else{
 				motion_num++;
 				moved = 0;
@@ -113,10 +117,17 @@ public class DrawPanel extends JPanel implements ActionListener {
 
 		Graphics2D panel = (Graphics2D)window_width;
 		panel.setRenderingHint(KEY_ANTIALIASING, VALUE_ANTIALIAS_ON);
+		
+		// draw hand
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		hand = tk.getImage(getClass().getResource("data/hand.png"));
+		panel.drawImage(hand, 0, 0, this);
 
+		// draw ground
 		panel.setColor(Color.gray);
 		panel.fillRect(0, window_height-ground_height, 1600, ground_height);
 
+		// draw block
 		for(int i=0; i<block.length; i++) {
 			block[i].draw(panel);
 		}
